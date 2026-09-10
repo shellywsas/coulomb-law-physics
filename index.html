@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>חוק קולון בפיזיקה | למידה אינטראקטיבית לכיתה י״ב</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Top Navigation & Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="logo-area">
+        <div class="logo-badge">⚡</div>
+        <div>
+          <h1>חוק קולון וחשמל סטטי</h1>
+          <p class="header-subtitle">פיזיקה ברמת 5 יח״ל • כיתה י״ב • הכנה לבגרות</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="btn-print" class="btn btn-print" title="הדפסת דפי סיכום ותרגול או שמירה כ-PDF">
+          🖨️ הדפסה / שמירה כ-PDF
+        </button>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <nav class="nav-tabs-wrapper">
+      <div class="nav-tabs">
+        <button class="nav-tab-btn active" data-tab="theory">
+          📖 תיאוריה והסברים
+        </button>
+        <button class="nav-tab-btn" data-tab="simulator">
+          🔬 סימולטור ומחשבון
+        </button>
+        <button class="nav-tab-btn" data-tab="exercises">
+          📝 תרגילים מודרכים
+        </button>
+        <button class="nav-tab-btn" data-tab="quiz">
+          🎯 בוחן ידע לבגרות
+        </button>
+        <button class="nav-tab-btn" data-tab="summary">
+          📌 דף נוסחאות מרוכז
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-content">
+    <!-- TAB 1: THEORY -->
+    <section id="tab-theory" class="tab-pane active">
+      <!-- Introduction Banner -->
+      <div class="pastel-card hero-pastel-blue">
+        <div class="hero-content">
+          <h2>ברוכים הבאים לחוק קולון (Coulomb's Law) ⚡</h2>
+          <p>
+            הכוח החשמלי הסטטי הוא אחד הכוחות הבסיסיים ביותר בטבע. הוא אחראי למבנה האטום, לקשרים כימיים בין מולקולות, ולתופעות חשמליות יומיומיות.
+            בדף זה תמצאו הסבר יסודי ומעמיק ברמת בחינת הבגרות, מהנוסחה הבסיסית ועד לעקרון הסופרפוזיציה.
+          </p>
+        </div>
+      </div>
+
+      <!-- Core Formula Card -->
+      <div class="pastel-card hero-pastel-mint">
+        <h3 class="section-title">💡 ניסוח חוק קולון</h3>
+        <p>
+          שארל-אוגוסטן דה קולון (1785) גילה בניסוייו כי הכוח החשמלי הפועל בין שני מטענים נקודתיים במנוחה תלוי <strong>במכפלת המטענים</strong> ונמצא ב<strong>יחס הפוך לריבוע המרחק</strong> ביניהם:
+        </p>
+
+        <div class="formula-box">
+          <div class="formula-main">
+            $$F = k \cdot \frac{|q_1 \cdot q_2|}{r^2}$$
+          </div>
+          <div class="formula-legend">
+            <div class="legend-item">
+              <span class="symbol">F</span>
+              <span>גודל הכוח האלקטרוסטטי הפועל על כל אחד מהמטענים (ביחידות ניוטון, <strong>N</strong>)</span>
+            </div>
+            <div class="legend-item">
+              <span class="symbol">q₁, q₂</span>
+              <span>גודל המטענים הנקודתיים (ביחידות קולון, <strong>C</strong>)</span>
+            </div>
+            <div class="legend-item">
+              <span class="symbol">r</span>
+              <span>המרחק בין מרכזי שני המטענים (ביחידות מטר, <strong>m</strong>)</span>
+            </div>
+            <div class="legend-item">
+              <span class="symbol">k</span>
+              <span>קבוע קולון בריק: \(k \approx 8.99 \times 10^9 \text{ N}\cdot\text{m}^2/\text{C}^2\)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="note-box">
+          <strong>🔍 שימו לב למקדם \(k\):</strong>
+          בפיזיקה תיאורטית כותבים אותו גם בצורה: 
+          \(k = \frac{1}{4\pi\varepsilon_0}\), כאשר \(\varepsilon_0 \approx 8.85 \times 10^{-12} \text{ C}^2/(\text{N}\cdot\text{m}^2)\) הוא המקדם הדיאלקטרי של הריק (Permittivity of Free Space). בבחינת הבגרות לרוב משתמשים בקירוב: \(k \approx 9 \times 10^9 \text{ N}\cdot\text{m}^2/\text{C}^2\).
+        </div>
+      </div>
+
+      <!-- Nature of Force & Newton's 3rd Law -->
+      <div class="grid-2-cols">
+        <div class="pastel-card hero-pastel-peach">
+          <h3 class="section-title">🧲 כיוון הכוח: משיכה או דחייה?</h3>
+          <p>הכוח החשמלי הוא גודל <strong>וקטורי</strong> (בעל גודל וכיוון):</p>
+          <ul class="styled-list">
+            <li>
+              <strong>מטענים שווי סימן (חיובי-חיובי או שלילי-שלילי):</strong>
+              <span class="badge badge-danger">דחייה</span>
+              הכוח דוחף את המטענים זה הרחק מזה לאורך הקו המחבר ביניהם.
+            </li>
+            <li>
+              <strong>מטענים שוני סימן (חיובי-שלילי):</strong>
+              <span class="badge badge-success">משיכה</span>
+              הכוח מושך את המטענים זה לקראת זה לאורך הקו המחבר ביניהם.
+            </li>
+          </ul>
+
+          <div class="highlight-alert">
+            <strong>⚠️ החוק השלישי של ניוטון תמיד מתקיים!</strong>
+            הכוח שמטען 1 מפעיל על מטען 2 <strong>שווה בגודלו ומנוגד בכיוונו</strong> לכוח שמטען 2 מפעיל על מטען 1:
+            $$\vec{F}_{1 \to 2} = -\vec{F}_{2 \to 1}$$
+            גם אם מטען אחד ענק (\(+100\mu\text{C}\)) והשני פצפון (\(+1\text{nC}\)) – <strong>הכוח ששניהם מרגישים זהה לחלוטין!</strong>
+          </div>
+        </div>
+
+        <div class="pastel-card hero-pastel-lavender">
+          <h3 class="section-title">🪐 השוואה: חוק קולון מול חוק הכבידה</h3>
+          <p>קיים דמיון מתמטי מופלא בין חוק קולון לחוק הכבידה העולמי של ניוטון:</p>
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>תכונה</th>
+                <th>חוק קולון (חשמל)</th>
+                <th>חוק הכבידה (ניוטון)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>הנוסחה</strong></td>
+                <td>\(F = k \frac{|q_1 q_2|}{r^2}\)</td>
+                <td>\(F = G \frac{m_1 m_2}{r^2}\)</td>
+              </tr>
+              <tr>
+                <td><strong>תלות במרחק</strong></td>
+                <td>יחס הפוך לריבוע המרחק (\(1/r^2\))</td>
+                <td>יחס הפוך לריבוע המרחק (\(1/r^2\))</td>
+              </tr>
+              <tr>
+                <td><strong>סוג הכוח</strong></td>
+                <td><strong>משיכה או דחייה</strong></td>
+                <td><strong>משיכה בלבד</strong></td>
+              </tr>
+              <tr>
+                <td><strong>עוצמת הכוח</strong></td>
+                <td>חזק במיוחד (\(k \sim 10^9\))</td>
+                <td>חלש מאוד (\(G \sim 10^{-11}\))</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="caption-text">לדוגמה: בין שני פרוטונים באטום, הכוח החשמלי חזק ב-36 סדרי גודל (פי \(10^{36}\)) מכוח הכבידה ביניהם!</p>
+        </div>
+      </div>
+
+      <!-- Superposition Principle -->
+      <div class="pastel-card hero-pastel-yellow">
+        <h3 class="section-title">🧩 עקרון הסופרפוזיציה (חיבור כוחות ממספר מטענים)</h3>
+        <p>
+          מה קורה כאשר יש במרחב יותר משני מטענים? 
+          <strong>עקרון הסופרפוזיציה</strong> קובע כי הכוח השקול הפועל על מטען מסוים שווה ל<strong>סכום הווקטורי</strong> של כל הכוחות הנפרדים שכל אחד מהמטענים האחרים מפעיל עליו:
+        </p>
+        <div class="formula-box">
+          $$\vec{F}_{\text{total}} = \vec{F}_1 + \vec{F}_2 + \vec{F}_3 + \dots = \sum_{i} \vec{F}_i$$
+        </div>
+        <p>
+          <strong>איך פותרים שאלת סופרפוזיציה בבגרות?</strong>
+        </p>
+        <ol class="styled-steps">
+          <li><strong>ציור מדויק:</strong> מסמנים את המטען הנבדק ומציירים את כל וקטורי הכוח הפועלים עליו (משיכה/דחייה).</li>
+          <li><strong>חישוב גדלים:</strong> מחשבים בנפרד את גודל כל כוח באמצעות חוק קולון: \(F_i = k \frac{|q \cdot q_i|}{r_i^2}\).</li>
+          <li><strong>פירוק לרכיבים (אם המטענים אינם על ישר אחד):</strong> מפרקים כל כוח לרכיב \(F_x = F \cos\theta\) ולרכיב \(F_y = F \sin\theta\).</li>
+          <li><strong>סכימה:</strong> מחשבים \(\Sigma F_x\) ו-\(\Sigma F_y\), ולבסוף מוצאים את הכוח השקול: \(F_{\text{total}} = \sqrt{(\Sigma F_x)^2 + (\Sigma F_y)^2}\).</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- TAB 2: SIMULATOR & CALCULATOR -->
+    <section id="tab-simulator" class="tab-pane">
+      <div class="grid-2-cols">
+        <!-- Interactive Canvas Card -->
+        <div class="pastel-card sim-card">
+          <div class="sim-header">
+            <h3>🔬 סימולציה ויזואלית חיה</h3>
+            <span class="badge badge-info" id="sim-force-type-badge">דחייה הדדית</span>
+          </div>
+
+          <div class="canvas-container">
+            <canvas id="coulombCanvas" width="600" height="300"></canvas>
+            <div class="canvas-overlay-info">
+              <span id="canvas-dist-display">מרחק: 1.00 מטר</span>
+              <span id="canvas-force-display">כוח: 8.99 N</span>
+            </div>
+          </div>
+
+          <!-- Controls -->
+          <div class="sim-controls">
+            <!-- Charge 1 Slider -->
+            <div class="control-group">
+              <div class="control-label">
+                <span>מטען ראשון (\(q_1\)):</span>
+                <strong id="q1-val-display" class="val-display">+5 µC</strong>
+              </div>
+              <input type="range" id="q1-slider" min="-20" max="20" value="5" step="1">
+              <div class="slider-ticks">
+                <span>-20µC</span>
+                <span>0</span>
+                <span>+20µC</span>
+              </div>
+            </div>
+
+            <!-- Charge 2 Slider -->
+            <div class="control-group">
+              <div class="control-label">
+                <span>מטען שני (\(q_2\)):</span>
+                <strong id="q2-val-display" class="val-display">+5 µC</strong>
+              </div>
+              <input type="range" id="q2-slider" min="-20" max="20" value="5" step="1">
+              <div class="slider-ticks">
+                <span>-20µC</span>
+                <span>0</span>
+                <span>+20µC</span>
+              </div>
+            </div>
+
+            <!-- Distance Slider -->
+            <div class="control-group">
+              <div class="control-label">
+                <span>מרחק בין המטענים (\(r\)):</span>
+                <strong id="r-val-display" class="val-display">0.10 מטר (10 ס״מ)</strong>
+              </div>
+              <input type="range" id="r-slider" min="0.02" max="0.50" value="0.10" step="0.01">
+              <div class="slider-ticks">
+                <span>2 ס״מ</span>
+                <span>25 ס״מ</span>
+                <span>50 ס״מ</span>
+              </div>
+            </div>
+
+            <div class="btn-group-center">
+              <button id="btn-reset-sim" class="btn btn-secondary btn-sm">🔄 איפוס לערכי ברירת מחדל</button>
+              <button id="btn-opposite-charges" class="btn btn-primary btn-sm">🧲 הדגם משיכה (+ מול -)</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Step-by-Step Calculator -->
+        <div class="pastel-card calc-card">
+          <h3 class="section-title">🧮 מחשבון חוק קולון ושלבי הצבה</h3>
+          <p class="caption-text">החישוב מתעדכן בזמן אמת לפי הערכים שבחרתם בסליידרים:</p>
+
+          <div class="calc-steps-box">
+            <div class="calc-step">
+              <div class="step-num">1</div>
+              <div class="step-detail">
+                <strong>רישום הנתונים ביחידות תקניות (SI):</strong>
+                <ul class="data-si-list">
+                  <li>\(q_1 = \)<span id="calc-q1-si">5 \times 10^{-6}\text{ C}</span></li>
+                  <li>\(q_2 = \)<span id="calc-q2-si">5 \times 10^{-6}\text{ C}</span></li>
+                  <li>\(r = \)<span id="calc-r-si">0.10\text{ m}</span></li>
+                  <li>\(k = 8.99 \times 10^9 \text{ N}\cdot\text{m}^2/\text{C}^2\)</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="calc-step">
+              <div class="step-num">2</div>
+              <div class="step-detail">
+                <strong>הצבה בנוסחת חוק קולון:</strong>
+                <div class="calc-formula-render" id="calc-formula-sub">
+                  \(F = 8.99 \times 10^9 \cdot \frac{|5\times 10^{-6} \cdot 5\times 10^{-6}|}{0.10^2}\)
+                </div>
+              </div>
+            </div>
+
+            <div class="calc-step">
+              <div class="step-num">3</div>
+              <div class="step-detail">
+                <strong>תוצאה סופית:</strong>
+                <div class="calc-result-badge">
+                  <div class="result-f" id="calc-result-force">F = 22.48 N</div>
+                  <div class="result-dir" id="calc-result-nature">כוח דחייה הדדי (שני מטענים חיוביים)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="insight-pill">
+            💡 <strong>ניסוי מחשבתי:</strong> נסו להקטין את המרחק בחצי (מ-10 ס״מ ל-5 ס״מ) וראו כיצד הכוח גדל בדיוק <strong>פי 4</strong> (כי \(F \propto \frac{1}{r^2}\))!
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: GUIDED EXERCISES -->
+    <section id="tab-exercises" class="tab-pane">
+      <div class="pastel-card hero-pastel-cream">
+        <h2>📝 תרגילים פתורים ברמת בחינת הבגרות</h2>
+        <p>תרגול מודרך שלב-אחר-שלב של סוגי השאלות הנפוצים ביותר בנושא חוק קולון.</p>
+      </div>
+
+      <!-- Exercise 1 -->
+      <div class="pastel-card exercise-card">
+        <div class="exercise-header">
+          <span class="badge badge-primary">תרגיל 1: בסיסי</span>
+          <h3>חישוב כוח בין שני כדורים מוליכים טעונים</h3>
+        </div>
+        <div class="exercise-body">
+          <p>
+            שני כדורים מוליכים קטנים הנמצאים בריק במרחק \(30\text{ cm}\) זה מזה טעונים במטענים: 
+            \(q_1 = +6\,\mu\text{C}\) ו-\(q_2 = -2\,\mu\text{C}\).
+          </p>
+          <ol class="exercise-subquestions">
+            <li>מהו גודלו וכיוונו של הכוח החשמלי ההדדי הפועל ביניהם?</li>
+            <li>מקרבים את המרחק ביניהם ל-\(15\text{ cm}\). פי כמה ישתנה גודל הכוח?</li>
+            <li>נוגעים עם הכדורים זה בזה ולאחר מכן מחזירים אותם למרחק המקורי (\(30\text{ cm}\)). מה יהיה הכוח החדש ביניהם?</li>
+          </ol>
+
+          <button class="btn btn-secondary btn-sm toggle-solution-btn">
+            🔍 הצג פתרון מלא מודרך
+          </button>
+
+          <div class="solution-content hidden">
+            <h4>פתרון מלא:</h4>
+            <div class="solution-step">
+              <strong>סעיף א':</strong>
+              המרה ליחידות SI: \(r = 0.3\text{ m}\), \(q_1 = 6\times 10^{-6}\text{ C}\), \(q_2 = -2\times 10^{-6}\text{ C}\).<br>
+              הצבה בחוק קולון:
+              $$F = 9\times 10^9 \cdot \frac{|6\times 10^{-6} \cdot (-2\times 10^{-6})|}{0.3^2} = 9\times 10^9 \cdot \frac{12\times 10^{-12}}{0.09} = 1.2\text{ N}$$
+              <strong>כיוון:</strong> משיכה הדדית (המטענים שוני סימן).
+            </div>
+            <div class="solution-step">
+              <strong>סעיף ב':</strong>
+              המרחק הוקטן פי 2 (\(r' = r/2\)). מכיוון שהכוח נמצא ביחס הפוך לריבוע המרחק:
+              $$F' = k \frac{|q_1 q_2|}{(r/2)^2} = 4 \cdot \left(k \frac{|q_1 q_2|}{r^2}\right) = 4F$$
+              לכן הכוח יגדל <strong>פי 4</strong> (גודלו יהיה \(4.8\text{ N}\)).
+            </div>
+            <div class="solution-step">
+              <strong>סעיף ג':</strong>
+              במגע בין כדורים זהים חל שיתוף מטען שווה:
+              $$q_{\text{new}} = \frac{q_1 + q_2}{2} = \frac{+6\mu\text{C} + (-2\mu\text{C})}{2} = +2\,\mu\text{C}$$
+              כעת שניהם חיוביים ולכן הכוח ביניהם הופך ל<strong>דחייה</strong>:
+              $$F_{\text{after}} = 9\times 10^9 \cdot \frac{(2\times 10^{-6})^2}{0.3^2} = 9\times 10^9 \cdot \frac{4\times 10^{-12}}{0.09} = 0.4\text{ N (דחייה)}$$
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercise 2 -->
+      <div class="pastel-card exercise-card">
+        <div class="exercise-header">
+          <span class="badge badge-warning">תרגיל 2: שיווי משקל ואיפוס כוח</span>
+          <h3>מציאת נקודת איפוס כוח חשמלי על ישר</h3>
+        </div>
+        <div class="exercise-body">
+          <p>
+            שני מטענים נקודתיים מקובעים במקומם על ציר ה-X:
+            מטען \(q_1 = +4\,\mu\text{C}\) בראשית הצירים (\(x = 0\)), ומטען \(q_2 = +9\,\mu\text{C}\) בנקודה \(x = 50\text{ cm}\).
+            היכן על ציר ה-X יש להניח מטען שלישי \(q_3\) כך שהכוח השקול הפועל עליו יהיה שווה לאפס?
+          </p>
+
+          <button class="btn btn-secondary btn-sm toggle-solution-btn">
+            🔍 הצג פתרון מלא מודרך
+          </button>
+
+          <div class="solution-content hidden">
+            <h4>פתרון מלא:</h4>
+            <div class="solution-step">
+              <strong>ניתוח כיוונים:</strong><br>
+              מכיוון ששני המטענים \(q_1\) ו-\(q_2\) הם בעלי אותו סימן (חיוביים), נקודת האיפוס חייבת להימצא <strong>ביניהם</strong> (בקטע \(0 < x < 0.5\text{ m}\)), כך שהכוחות ששניהם מפעילים על \(q_3\) יהיו בכיוונים מנוגדים.
+            </div>
+            <div class="solution-step">
+              <strong>משוואת שיווי משקל:</strong><br>
+              נסמן את מיקום המטען השלישי ב-\(x\). מרחקו מ-\(q_1\) הוא \(x\), ומרחקו מ-\(q_2\) הוא \(0.5 - x\).<br>
+              נדרוש שיוויון גדלי הכוחות: \(F_{1 \to 3} = F_{2 \to 3}\):
+              $$k \frac{|q_1 \cdot q_3|}{x^2} = k \frac{|q_2 \cdot q_3|}{(0.5 - x)^2}$$
+              נצמצם את \(k\) ואת \(|q_3|\) (התוצאה אינה תלויה בגודל או בסימן של \(q_3\)!):
+              $$\frac{q_1}{x^2} = \frac{q_2}{(0.5 - x)^2} \implies \frac{4}{x^2} = \frac{9}{(0.5 - x)^2}$$
+              נוציא שורש ריבועי משני האגפים:
+              $$\frac{2}{x} = \frac{3}{0.5 - x} \implies 2(0.5 - x) = 3x \implies 1 - 2x = 3x \implies 5x = 1 \implies x = 0.2\text{ m} = 20\text{ cm}$$
+              <strong>תשובה:</strong> יש להניח את המטען במרחק \(20\text{ cm}\) מ-\(q_1\) (כלומר בנקודה \(x = 20\text{ cm}\)).
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Exercise 3 -->
+      <div class="pastel-card exercise-card">
+        <div class="exercise-header">
+          <span class="badge badge-info">תרגיל 3: סופרפוזיציה ב-2D</span>
+          <h3>כוח שקול במשולש שווה צלעות</h3>
+        </div>
+        <div class="exercise-body">
+          <p>
+            שלושה מטענים שווים \(q = +2\,\mu\text{C}\) מונחים בקודקודי משולש שווה צלעות שאורך צלעו \(a = 30\text{ cm}\).
+            מהו גודל הכוח החשמלי השקול הפועל על אחד המטענים?
+          </p>
+
+          <button class="btn btn-secondary btn-sm toggle-solution-btn">
+            🔍 הצג פתרון מלא מודרך
+          </button>
+
+          <div class="solution-content hidden">
+            <h4>פתרון מלא:</h4>
+            <div class="solution-step">
+              <strong>1. גודל כל כוח נפרד:</strong><br>
+              כל אחד משני המטענים האחרים דוחה את המטען הנבחר בכוח בגודל:
+              $$F_1 = F_2 = 9\times 10^9 \cdot \frac{(2\times 10^{-6})^2}{0.3^2} = 9\times 10^9 \cdot \frac{4\times 10^{-12}}{0.09} = 0.4\text{ N}$$
+            </div>
+            <div class="solution-step">
+              <strong>2. הזווית בין הכוחות:</strong><br>
+              במשולש שווה צלעות הזוויות הפנימיות הן \(60^\circ\). מכיוון ששני הכוחות הם כוחות דחייה לאורך המשכי הצלעות, הזווית בין שני וקטורי הכוח היא גם \(\alpha = 60^\circ\).
+            </div>
+            <div class="solution-step">
+              <strong>3. חישוב הכוח השקול:</strong><br>
+              באמצעות משפט הקוסינוסים לחיבור וקטורים (או פירוק לרכיבי סימטריה):
+              $$F_{\text{net}} = \sqrt{F_1^2 + F_2^2 + 2 F_1 F_2 \cos(60^\circ)}$$
+              מכיוון ש-\(F_1 = F_2 = F\) ו-\(\cos(60^\circ) = 0.5\):
+              $$F_{\text{net}} = \sqrt{F^2 + F^2 + 2F^2(0.5)} = \sqrt{3F^2} = F\sqrt{3} = 0.4 \cdot 1.732 \approx 0.693\text{ N}$$
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: QUIZ -->
+    <section id="tab-quiz" class="tab-pane">
+      <div class="pastel-card hero-pastel-lavender">
+        <h2>🎯 בוחן ידע אינטראקטיבי לחוק קולון</h2>
+        <p>בדקו את הבנתכם עם שאלות מרובות ברירה בסגנון בגרות. קבלו משוב והסבר מפורט לכל שאלה!</p>
+        <div class="quiz-score-banner" id="quiz-score-banner" style="display: none;">
+          <h3>הציון שלך: <span id="quiz-score-num">0</span> מתוך <span id="quiz-total-num">5</span></h3>
+          <p id="quiz-feedback-text">ענו על כל השאלות כדי לראות משוב מלא.</p>
+        </div>
+      </div>
+
+      <div id="quiz-questions-container" class="quiz-container">
+        <!-- Injected via JS -->
+      </div>
+
+      <div class="quiz-footer-actions">
+        <button id="btn-submit-quiz" class="btn btn-primary">
+          ✅ בדיקת תשובות והצגת ציון
+        </button>
+        <button id="btn-reset-quiz" class="btn btn-secondary">
+          🔄 איפוס שאלון
+        </button>
+      </div>
+    </section>
+
+    <!-- TAB 5: PRINTABLE SUMMARY (CHEAT SHEET) -->
+    <section id="tab-summary" class="tab-pane">
+      <div class="printable-sheet">
+        <div class="print-header-only">
+          <h2>דף סיכום ונוסחאות: חוק קולון וחשמל סטטי</h2>
+          <p>הכנה לבגרות בפיזיקה 5 יח״ל • מיועד להדפסה</p>
+          <hr>
+        </div>
+
+        <div class="pastel-card summary-card">
+          <div class="summary-header">
+            <h3>📌 דף נוסחאות מרוכז וטיפים לבגרות</h3>
+            <button class="btn btn-print btn-sm no-print" onclick="window.print()">
+              🖨️ הדפס עמוד זה עכשיו
+            </button>
+          </div>
+
+          <div class="summary-grid">
+            <div class="summary-box">
+              <h4>1. נוסחת חוק קולון</h4>
+              <div class="math-highlight">\(F = k \cdot \frac{|q_1 \cdot q_2|}{r^2}\)</div>
+              <ul>
+                <li>\(k = \frac{1}{4\pi\varepsilon_0} \approx 9 \times 10^9 \text{ N}\cdot\text{m}^2/\text{C}^2\)</li>
+                <li>מרחק \(r\) תמיד ב<strong>מטרים (m)</strong>!</li>
+                <li>מטען \(q\) תמיד ב<strong>קולון (C)</strong>!</li>
+              </ul>
+            </div>
+
+            <div class="summary-box">
+              <h4>2. המרות יחידות נפוצות</h4>
+              <ul>
+                <li>\(1\,\mu\text{C} = 10^{-6}\text{ C}\) (מיקרו)</li>
+                <li>\(1\,\text{nC} = 10^{-9}\text{ C}\) (נאנו)</li>
+                <li>\(1\,\text{pC} = 10^{-12}\text{ C}\) (פיקו)</li>
+                <li>\(1\text{ cm} = 10^{-2}\text{ m} = 0.01\text{ m}\)</li>
+                <li>\(1\text{ mm} = 10^{-3}\text{ m} = 0.001\text{ m}\)</li>
+              </ul>
+            </div>
+
+            <div class="summary-box">
+              <h4>3. עקרון הסופרפוזיציה</h4>
+              <div class="math-highlight">\(\vec{F}_{\text{net}} = \sum \vec{F}_i\)</div>
+              <ul>
+                <li>סכימה וקטורית לפי רכיבים:</li>
+                <li>\(\Sigma F_x = \sum F_i \cos\theta_i\)</li>
+                <li>\(\Sigma F_y = \sum F_i \sin\theta_i\)</li>
+                <li>\(F_{\text{net}} = \sqrt{(\Sigma F_x)^2 + (\Sigma F_y)^2}\)</li>
+              </ul>
+            </div>
+
+            <div class="summary-box">
+              <h4>4. טעויות נפוצות בבגרות שכדאי למנוע!</h4>
+              <ul>
+                <li>❌ <strong>שכחת העלאת המרחק בריבוע:</strong> תמיד לזכור \(r^2\) במכנה!</li>
+                <li>❌ <strong>אי המרת ס״מ למטר:</strong> למשל \(10\text{ cm} \to 0.1\text{ m}\), ואז בריבוע: \(0.01\text{ m}^2\).</li>
+                <li>❌ <strong>הכנסת מינוס לתוך נוסחת הגודל:</strong> עובדים בערך מוחלט, ואת הכיוון קובעים לפי משיכה/דחייה.</li>
+                <li>✅ <strong>חוק 3 של ניוטון:</strong> שני המטענים מרגישים כוחות שווים בדיוק בגודלם!</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Printable Questions for Homework / Practice -->
+          <div class="printable-hw-section">
+            <h4 class="hw-title">📝 שאלות חזרה מומלצות לתרגול אישי:</h4>
+            <div class="hw-item">
+              <strong>שאלה 1:</strong> שני מטענים נקודתיים דוחים זה את זה בכוח של \(16\text{ N}\). מה יהיה הכוח אם נכפיל את המרחק ביניהם פי 4 ונשלש את אחד המטענים? <em>(תשובה: \(3\text{ N}\))</em>
+            </div>
+            <div class="hw-item">
+              <strong>שאלה 2:</strong> באיזה מרחק יש להציב שני מטענים של \(+1\mu\text{C}\) ו-\(+4\mu\text{C}\) כדי שיפעילו זה על זה כוח דחייה של \(0.9\text{ N}\)? <em>(תשובה: \(0.2\text{ m} = 20\text{ cm}\))</em>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <div class="footer-container">
+      <p>אתר לימודי לחוק קולון בפיזיקה • נבנה עבור כיתה י״ב 5 יח״ל • בהצלחה בבגרות! 🎓</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
