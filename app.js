@@ -1,6 +1,6 @@
 /**
  * Coulomb's Law Interactive Learning Website
- * Logic for Simulation, Live Calculator, Quiz Engine & Printing
+ * Logic for Simulation, Live Calculator, Quiz Engine & A4 Printing
  */
 
 // Global state
@@ -52,7 +52,7 @@ const calcResultNature = document.getElementById('calc-result-nature');
 const quizQuestions = [
   {
     id: 1,
-    title: 'שאלה 1: תלות במרחק',
+    title: 'שאלה 1: תלות במרחק (חוק ריבוע הפוך)',
     question: 'שני מטענים נקודתיים מפעילים זה על זה כוח חשמלי של 18 ניוטון. אם נגדיל את המרחק ביניהם פי 3, מה יהיה גודל הכוח החדש?',
     options: [
       '54 ניוטון (הכוח יגדל פי 3)',
@@ -61,7 +61,7 @@ const quizQuestions = [
       '0.67 ניוטון (הכוח יקטן פי 27)'
     ],
     correctIndex: 2,
-    explanation: 'נכון מאוד! לפי חוק קולון הכוח תלוי ביחס הפוך לריבוע המרחק (1/r²). הגדלת המרחק פי 3 גורמת להקטנת הכוח פי 3² = 9. לכן: 18/9 = 2 ניוטון.'
+    explanation: 'נכון מאוד! לפי חוק קולון הכוח תלוי ביחס הפוך לריבוע המרחק (1/r²). הגדלת המרחק פי 3 גורמת להקטנת הכוח פי 3² = 9. לכן: 18 חלקי 9 = 2 ניוטון.'
   },
   {
     id: 2,
@@ -74,7 +74,7 @@ const quizQuestions = [
       'מטען A כלל אינו מרגיש כוח כי מטענו חזק יותר.'
     ],
     correctIndex: 1,
-    explanation: 'מצוין! לפי החוק השלישי של ניוטון, כל כוח בטבע מופיע בזוג פעולה ותגובה: הכוח שמטען A מפעיל על B שווה בגודלו ומנוגד בכיוונו לכוח ש-B מפעיל על A, ללא קשר לגודל המטענים!'
+    explanation: 'מצוין! לפי החוק השלישי של ניוטון, כל כוח בטבע מופיע בזוג פעולה ותגובה: הכוח שמטען A מפעיל על B שווה תמיד בגודלו ומנוגד בכיוונו לכוח ש-B מפעיל על A, ללא כל קשר לגודל המטענים!'
   },
   {
     id: 3,
@@ -126,7 +126,44 @@ document.addEventListener('DOMContentLoaded', () => {
   initQuiz();
   initPrint();
   updateCalculationsAndCanvas();
+  renderLatexMath();
 });
+
+/**
+ * Trigger KaTeX math render safely
+ */
+function renderLatexMath() {
+  if (window.renderMathInElement) {
+    try {
+      renderMathInElement(document.body, {
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '\\[', right: '\\]', display: true },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '$', right: '$', display: false }
+        ],
+        throwOnError: false
+      });
+    } catch (e) {
+      console.warn('KaTeX render error:', e);
+    }
+  } else {
+    // Retry once KaTeX finishes loading from CDN
+    setTimeout(() => {
+      if (window.renderMathInElement) {
+        renderMathInElement(document.body, {
+          delimiters: [
+            { left: '$$', right: '$$', display: true },
+            { left: '\\[', right: '\\]', display: true },
+            { left: '\\(', right: '\\)', display: false },
+            { left: '$', right: '$', display: false }
+          ],
+          throwOnError: false
+        });
+      }
+    }, 500);
+  }
+}
 
 /**
  * Tabs System
@@ -142,6 +179,9 @@ function initTabs() {
       if (targetTab === 'simulator') {
         setTimeout(updateCalculationsAndCanvas, 50);
       }
+
+      // Re-render math if needed
+      renderLatexMath();
     });
   });
 }
@@ -211,6 +251,7 @@ function initExerciseAccordions() {
       const isHidden = solution.classList.contains('hidden');
       solution.classList.toggle('hidden', !isHidden);
       btn.textContent = isHidden ? '🙈 הסתר פתרון' : '🔍 הצג פתרון מלא מודרך';
+      renderLatexMath();
     });
   });
 }
@@ -221,7 +262,6 @@ function initExerciseAccordions() {
 function initPrint() {
   if (printBtn) {
     printBtn.addEventListener('click', () => {
-      // Switch to summary tab or trigger print
       window.print();
     });
   }
@@ -255,13 +295,13 @@ function updateCalculationsAndCanvas() {
   let badgeClass = 'badge-info';
 
   if (isNeutral) {
-    natureText = 'אין כוח חשמלי (אחד המטענים ניטרלי)';
+    natureText = 'אין כוח חשמלי (אחד המטענים ניטרלי = 0)';
     badgeClass = 'badge-warning';
   } else if (isRepulsion) {
-    natureText = 'כוח דחייה הדדי (מטענים שווי סימן דוחים)';
+    natureText = 'כוח דחייה הדדי (מטענים שווי סימן דוחים זה את זה)';
     badgeClass = 'badge-danger';
   } else {
-    natureText = 'כוח משיכה הדדי (מטענים שוני סימן מושכים)';
+    natureText = 'כוח משיכה הדדי (מטענים שוני סימן מושכים זה את זה)';
     badgeClass = 'badge-success';
   }
 
@@ -270,13 +310,21 @@ function updateCalculationsAndCanvas() {
     simForceTypeBadge.className = `badge ${badgeClass}`;
   }
 
-  // Update Calculator Elements
-  if (calcQ1SI) calcQ1SI.textContent = `${state.q1} \\times 10^{-6}\\text{ C}`;
-  if (calcQ2SI) calcQ2SI.textContent = `${state.q2} \\times 10^{-6}\\text{ C}`;
-  if (calcRSI) calcRSI.textContent = `${state.r.toFixed(2)}\\text{ m}`;
+  // Update Calculator Elements with CLEAN text (no raw LaTeX gibberish)
+  if (calcQ1SI) calcQ1SI.textContent = `${state.q1} × 10⁻⁶ C`;
+  if (calcQ2SI) calcQ2SI.textContent = `${state.q2} × 10⁻⁶ C`;
+  if (calcRSI) calcRSI.textContent = `${state.r.toFixed(2)} m`;
 
   if (calcFormulaSub) {
-    calcFormulaSub.textContent = `F = 8.99 \\times 10^9 \\cdot \\frac{|${state.q1}\\times 10^{-6} \\cdot ${state.q2}\\times 10^{-6}|}{(${state.r.toFixed(2)})^2}`;
+    const q1Abs = Math.abs(state.q1);
+    const q2Abs = Math.abs(state.q2);
+    calcFormulaSub.innerHTML = `
+      <span>F = 8.99 × 10⁹ · </span>
+      <div style="display:inline-flex; flex-direction:column; vertical-align:middle; text-align:center; padding:0 4px;">
+        <span style="border-bottom:2px solid #1e40af; padding-bottom:2px;">| (${q1Abs} × 10⁻⁶) · (${q2Abs} × 10⁻⁶) |</span>
+        <span style="padding-top:2px;">(${state.r.toFixed(2)})²</span>
+      </div>
+    `;
   }
 
   const forceFormatted = formatForce(force);
@@ -322,7 +370,6 @@ function drawSimulation(force, isRepulsion, isNeutral) {
   }
 
   // Positions on Canvas
-  // Map distance (0.02m - 0.50m) to pixel distance (100px - 440px)
   const minPixDist = 110;
   const maxPixDist = 440;
   const tDist = (state.r - 0.02) / (0.50 - 0.02);
@@ -357,17 +404,14 @@ function drawSimulation(force, isRepulsion, isNeutral) {
 
   // 2. Vector Force Arrows
   if (!isNeutral && force > 0) {
-    // Determine arrow length: scaled logarithmically so small and large forces both look good
     const maxArrowLen = 85;
     const minArrowLen = 25;
-    // Log scale between 0.01 N and 1000 N
     const logF = Math.max(-2, Math.min(3, Math.log10(force)));
     const tF = (logF + 2) / 5;
     const arrowLen = minArrowLen + tF * (maxArrowLen - minArrowLen);
 
-    // Charge 1 Arrow
-    let arrow1Dir = isRepulsion ? -1 : 1; // Repulsion pushes left, attraction pulls right
-    let arrow2Dir = isRepulsion ? 1 : -1; // Repulsion pushes right, attraction pulls left
+    let arrow1Dir = isRepulsion ? -1 : 1;
+    let arrow2Dir = isRepulsion ? 1 : -1;
 
     drawVectorArrow(ctx, x1, centerY, x1 + arrow1Dir * arrowLen, centerY, '#0284c7', 'F₂₁');
     drawVectorArrow(ctx, x2, centerY, x2 + arrow2Dir * arrowLen, centerY, '#0284c7', 'F₁₂');
@@ -389,11 +433,11 @@ function drawChargeSphere(ctx, x, y, qVal, label) {
   let symbol = '0';
 
   if (qVal > 0) {
-    baseColor = '#f43f5e'; // Red/Pink for Positive
+    baseColor = '#f43f5e';
     glowColor = 'rgba(244, 63, 94, 0.25)';
     symbol = '+';
   } else if (qVal < 0) {
-    baseColor = '#3b82f6'; // Blue for Negative
+    baseColor = '#3b82f6';
     glowColor = 'rgba(59, 130, 246, 0.25)';
     symbol = '-';
   }
@@ -512,14 +556,12 @@ function initQuiz() {
   if (btnSubmitQuiz) {
     btnSubmitQuiz.addEventListener('click', () => {
       let score = 0;
-      let allAnswered = true;
 
       quizQuestions.forEach((q, qIndex) => {
         const selectedRadio = document.querySelector(`input[name="question_${qIndex}"]:checked`);
         const card = document.getElementById(`quiz-card-${qIndex}`);
 
         if (!selectedRadio) {
-          allAnswered = false;
           card.classList.remove('correct', 'wrong');
         } else {
           const selectedVal = parseInt(selectedRadio.value, 10);
